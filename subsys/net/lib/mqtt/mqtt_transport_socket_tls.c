@@ -172,6 +172,9 @@ int mqtt_client_tls_write_msg(struct mqtt_client *client,
 		}
 	}
 
+	/* TK: Dirty hack to force RRC disconnect. */
+	setsockopt(client->transport.tls.sock, SOL_SOCKET, SO_RAI_NO_DATA, NULL, 0);
+
 	return 0;
 }
 
